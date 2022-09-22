@@ -1,0 +1,940 @@
+
+GccApplication8.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000034  00800100  000005b0  00000644  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000005b0  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          0000000c  00800134  00800134  00000678  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000678  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000006a8  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000168  00000000  00000000  000006e8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00001596  00000000  00000000  00000850  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000bb3  00000000  00000000  00001de6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000c0f  00000000  00000000  00002999  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000350  00000000  00000000  000035a8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000006a7  00000000  00000000  000038f8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000be7  00000000  00000000  00003f9f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000128  00000000  00000000  00004b86  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 af 01 	jmp	0x35e	; 0x35e <__vector_11>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e0 eb       	ldi	r30, 0xB0	; 176
+  7c:	f5 e0       	ldi	r31, 0x05	; 5
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	a4 33       	cpi	r26, 0x34	; 52
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	a4 e3       	ldi	r26, 0x34	; 52
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	a0 34       	cpi	r26, 0x40	; 64
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 7b 01 	call	0x2f6	; 0x2f6 <main>
+  9e:	0c 94 d6 02 	jmp	0x5ac	; 0x5ac <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <timerControl>:
+	if(*event[i].timer >= 1){
+		timerControl(event[i].timer,1);
+	}
+}
+
+void timerControl(volatile uint8_t *timer, uint8_t init){
+  a6:	fc 01       	movw	r30, r24
+	if (init){
+  a8:	66 23       	and	r22, r22
+  aa:	49 f1       	breq	.+82     	; 0xfe <timerControl+0x58>
+		if(*timer == hlavniOsvetleni){
+  ac:	90 81       	ld	r25, Z
+  ae:	87 b5       	in	r24, 0x27	; 39
+  b0:	98 13       	cpse	r25, r24
+  b2:	08 c0       	rjmp	.+16     	; 0xc4 <timerControl+0x1e>
+			DDRD |= (1 << PIND6);
+  b4:	56 9a       	sbi	0x0a, 6	; 10
+			TCCR0A |= (1 << COM0A1) | (1 << WGM00) | (1 << WGM01);
+  b6:	84 b5       	in	r24, 0x24	; 36
+  b8:	83 68       	ori	r24, 0x83	; 131
+  ba:	84 bd       	out	0x24, r24	; 36
+			TCCR0B |= (1 << CS00);
+  bc:	85 b5       	in	r24, 0x25	; 37
+  be:	81 60       	ori	r24, 0x01	; 1
+  c0:	85 bd       	out	0x25, r24	; 37
+  c2:	08 95       	ret
+		}
+		else if(*timer == predniOsvetleni){
+  c4:	90 81       	ld	r25, Z
+  c6:	88 b5       	in	r24, 0x28	; 40
+  c8:	98 13       	cpse	r25, r24
+  ca:	08 c0       	rjmp	.+16     	; 0xdc <timerControl+0x36>
+			DDRD |= (1 << PIND5);
+  cc:	55 9a       	sbi	0x0a, 5	; 10
+			TCCR0A |= (1 << COM0B1) | (1 << WGM00) | (1 << WGM01);
+  ce:	84 b5       	in	r24, 0x24	; 36
+  d0:	83 62       	ori	r24, 0x23	; 35
+  d2:	84 bd       	out	0x24, r24	; 36
+			TCCR0B |= (1 << CS00);
+  d4:	85 b5       	in	r24, 0x25	; 37
+  d6:	81 60       	ori	r24, 0x01	; 1
+  d8:	85 bd       	out	0x25, r24	; 37
+  da:	08 95       	ret
+		}
+		else if(*timer == nocniOsvetleni){
+  dc:	90 81       	ld	r25, Z
+  de:	80 91 b4 00 	lds	r24, 0x00B4	; 0x8000b4 <__DATA_REGION_ORIGIN__+0x54>
+  e2:	98 13       	cpse	r25, r24
+  e4:	27 c0       	rjmp	.+78     	; 0x134 <timerControl+0x8e>
+			DDRD |= (1 << PIND3);
+  e6:	53 9a       	sbi	0x0a, 3	; 10
+			TCCR2A |= (1 << COM2B1) | (1 << WGM20) | (1 << WGM21);
+  e8:	e0 eb       	ldi	r30, 0xB0	; 176
+  ea:	f0 e0       	ldi	r31, 0x00	; 0
+  ec:	80 81       	ld	r24, Z
+  ee:	83 62       	ori	r24, 0x23	; 35
+  f0:	80 83       	st	Z, r24
+			TCCR2B |= (1 << CS20);
+  f2:	e1 eb       	ldi	r30, 0xB1	; 177
+  f4:	f0 e0       	ldi	r31, 0x00	; 0
+  f6:	80 81       	ld	r24, Z
+  f8:	81 60       	ori	r24, 0x01	; 1
+  fa:	80 83       	st	Z, r24
+  fc:	08 95       	ret
+		}
+	}
+	else if (!init){
+		if(*timer == hlavniOsvetleni){
+  fe:	90 81       	ld	r25, Z
+ 100:	87 b5       	in	r24, 0x27	; 39
+ 102:	98 13       	cpse	r25, r24
+ 104:	04 c0       	rjmp	.+8      	; 0x10e <timerControl+0x68>
+			DDRD &= ~(1 << PIND6);
+ 106:	56 98       	cbi	0x0a, 6	; 10
+			TCCR0A &= ~(1 << COM0A1);
+ 108:	84 b5       	in	r24, 0x24	; 36
+ 10a:	8f 77       	andi	r24, 0x7F	; 127
+ 10c:	84 bd       	out	0x24, r24	; 36
+		}
+		if(*timer == predniOsvetleni){
+ 10e:	90 81       	ld	r25, Z
+ 110:	88 b5       	in	r24, 0x28	; 40
+ 112:	98 13       	cpse	r25, r24
+ 114:	04 c0       	rjmp	.+8      	; 0x11e <timerControl+0x78>
+			DDRD &= ~(1 << PIND5);
+ 116:	55 98       	cbi	0x0a, 5	; 10
+			TCCR0A &= ~(1 << COM0B1);
+ 118:	84 b5       	in	r24, 0x24	; 36
+ 11a:	8f 7d       	andi	r24, 0xDF	; 223
+ 11c:	84 bd       	out	0x24, r24	; 36
+		}
+		if(*timer == nocniOsvetleni){
+ 11e:	90 81       	ld	r25, Z
+ 120:	80 91 b4 00 	lds	r24, 0x00B4	; 0x8000b4 <__DATA_REGION_ORIGIN__+0x54>
+ 124:	98 13       	cpse	r25, r24
+ 126:	06 c0       	rjmp	.+12     	; 0x134 <timerControl+0x8e>
+			DDRD &= ~(1 << PIND3);
+ 128:	53 98       	cbi	0x0a, 3	; 10
+			TCCR2A &= ~(1 << COM2B1);
+ 12a:	e0 eb       	ldi	r30, 0xB0	; 176
+ 12c:	f0 e0       	ldi	r31, 0x00	; 0
+ 12e:	80 81       	ld	r24, Z
+ 130:	8f 7d       	andi	r24, 0xDF	; 223
+ 132:	80 83       	st	Z, r24
+ 134:	08 95       	ret
+
+00000136 <doEvent>:
+			
+		}
+	}
+}
+
+void doEvent(int i){
+ 136:	cf 93       	push	r28
+ 138:	df 93       	push	r29
+ 13a:	ec 01       	movw	r28, r24
+	if(*event[i].timer < event[i].limit){
+ 13c:	fc 01       	movw	r30, r24
+ 13e:	ee 0f       	add	r30, r30
+ 140:	ff 1f       	adc	r31, r31
+ 142:	ee 0f       	add	r30, r30
+ 144:	ff 1f       	adc	r31, r31
+ 146:	e8 0f       	add	r30, r24
+ 148:	f9 1f       	adc	r31, r25
+ 14a:	e0 50       	subi	r30, 0x00	; 0
+ 14c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 14e:	a3 81       	ldd	r26, Z+3	; 0x03
+ 150:	b4 81       	ldd	r27, Z+4	; 0x04
+ 152:	9c 91       	ld	r25, X
+ 154:	82 81       	ldd	r24, Z+2	; 0x02
+ 156:	98 17       	cp	r25, r24
+ 158:	78 f4       	brcc	.+30     	; 0x178 <doEvent+0x42>
+		*event[i].timer++;
+ 15a:	fe 01       	movw	r30, r28
+ 15c:	ee 0f       	add	r30, r30
+ 15e:	ff 1f       	adc	r31, r31
+ 160:	ee 0f       	add	r30, r30
+ 162:	ff 1f       	adc	r31, r31
+ 164:	ec 0f       	add	r30, r28
+ 166:	fd 1f       	adc	r31, r29
+ 168:	e0 50       	subi	r30, 0x00	; 0
+ 16a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 16c:	cd 01       	movw	r24, r26
+ 16e:	01 96       	adiw	r24, 0x01	; 1
+ 170:	94 83       	std	Z+4, r25	; 0x04
+ 172:	83 83       	std	Z+3, r24	; 0x03
+ 174:	8c 91       	ld	r24, X
+ 176:	11 c0       	rjmp	.+34     	; 0x19a <doEvent+0x64>
+	}
+	else if(*event[i].timer < event[i].limit){
+ 178:	9c 91       	ld	r25, X
+ 17a:	98 17       	cp	r25, r24
+ 17c:	70 f4       	brcc	.+28     	; 0x19a <doEvent+0x64>
+		*event[i].timer--;
+ 17e:	fe 01       	movw	r30, r28
+ 180:	ee 0f       	add	r30, r30
+ 182:	ff 1f       	adc	r31, r31
+ 184:	ee 0f       	add	r30, r30
+ 186:	ff 1f       	adc	r31, r31
+ 188:	ec 0f       	add	r30, r28
+ 18a:	fd 1f       	adc	r31, r29
+ 18c:	e0 50       	subi	r30, 0x00	; 0
+ 18e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 190:	cd 01       	movw	r24, r26
+ 192:	01 97       	sbiw	r24, 0x01	; 1
+ 194:	94 83       	std	Z+4, r25	; 0x04
+ 196:	83 83       	std	Z+3, r24	; 0x03
+ 198:	8c 91       	ld	r24, X
+	}
+	
+	if(*event[i].timer == 0){
+ 19a:	fe 01       	movw	r30, r28
+ 19c:	ee 0f       	add	r30, r30
+ 19e:	ff 1f       	adc	r31, r31
+ 1a0:	ee 0f       	add	r30, r30
+ 1a2:	ff 1f       	adc	r31, r31
+ 1a4:	ec 0f       	add	r30, r28
+ 1a6:	fd 1f       	adc	r31, r29
+ 1a8:	e0 50       	subi	r30, 0x00	; 0
+ 1aa:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1ac:	03 80       	ldd	r0, Z+3	; 0x03
+ 1ae:	f4 81       	ldd	r31, Z+4	; 0x04
+ 1b0:	e0 2d       	mov	r30, r0
+ 1b2:	80 81       	ld	r24, Z
+ 1b4:	81 11       	cpse	r24, r1
+ 1b6:	04 c0       	rjmp	.+8      	; 0x1c0 <doEvent+0x8a>
+		timerControl(event[i].timer,0);
+ 1b8:	60 e0       	ldi	r22, 0x00	; 0
+ 1ba:	cf 01       	movw	r24, r30
+ 1bc:	0e 94 53 00 	call	0xa6	; 0xa6 <timerControl>
+	}
+	
+	if(*event[i].timer >= 1){
+ 1c0:	ce 01       	movw	r24, r28
+ 1c2:	88 0f       	add	r24, r24
+ 1c4:	99 1f       	adc	r25, r25
+ 1c6:	88 0f       	add	r24, r24
+ 1c8:	99 1f       	adc	r25, r25
+ 1ca:	c8 0f       	add	r28, r24
+ 1cc:	d9 1f       	adc	r29, r25
+ 1ce:	c0 50       	subi	r28, 0x00	; 0
+ 1d0:	df 4f       	sbci	r29, 0xFF	; 255
+ 1d2:	eb 81       	ldd	r30, Y+3	; 0x03
+ 1d4:	fc 81       	ldd	r31, Y+4	; 0x04
+ 1d6:	80 81       	ld	r24, Z
+ 1d8:	88 23       	and	r24, r24
+ 1da:	21 f0       	breq	.+8      	; 0x1e4 <doEvent+0xae>
+		timerControl(event[i].timer,1);
+ 1dc:	61 e0       	ldi	r22, 0x01	; 1
+ 1de:	cf 01       	movw	r24, r30
+ 1e0:	0e 94 53 00 	call	0xa6	; 0xa6 <timerControl>
+	}
+}
+ 1e4:	df 91       	pop	r29
+ 1e6:	cf 91       	pop	r28
+ 1e8:	08 95       	ret
+
+000001ea <ligtingRutine>:
+		if(enableRTC)ligtingRutine();
+	}
+}
+
+
+void ligtingRutine(){
+ 1ea:	cf 92       	push	r12
+ 1ec:	df 92       	push	r13
+ 1ee:	ef 92       	push	r14
+ 1f0:	ff 92       	push	r15
+ 1f2:	0f 93       	push	r16
+ 1f4:	1f 93       	push	r17
+ 1f6:	cf 93       	push	r28
+ 1f8:	df 93       	push	r29
+	hours = RTCGetHours();
+ 1fa:	0e 94 87 02 	call	0x50e	; 0x50e <RTCGetHours>
+ 1fe:	90 e0       	ldi	r25, 0x00	; 0
+ 200:	90 93 3f 01 	sts	0x013F, r25	; 0x80013f <hours+0x1>
+ 204:	80 93 3e 01 	sts	0x013E, r24	; 0x80013e <hours>
+	minutes = RTCGetMinutes();
+ 208:	0e 94 77 02 	call	0x4ee	; 0x4ee <RTCGetMinutes>
+ 20c:	90 e0       	ldi	r25, 0x00	; 0
+ 20e:	90 93 3d 01 	sts	0x013D, r25	; 0x80013d <minutes+0x1>
+ 212:	80 93 3c 01 	sts	0x013C, r24	; 0x80013c <minutes>
+	enableRTC = 0;
+ 216:	10 92 33 01 	sts	0x0133, r1	; 0x800133 <enableRTC+0x1>
+ 21a:	10 92 32 01 	sts	0x0132, r1	; 0x800132 <enableRTC>
+ 21e:	c0 e0       	ldi	r28, 0x00	; 0
+ 220:	d1 e0       	ldi	r29, 0x01	; 1
+
+	for(int i = 9;i > 0;i--){
+ 222:	09 e0       	ldi	r16, 0x09	; 9
+ 224:	10 e0       	ldi	r17, 0x00	; 0
+			}
+			else if(*event[i].timer == predniOsvetleni  && !frontLight){
+				doEvent(i);
+				frontLight = 1;
+			}
+			else if(*event[i].timer == nocniOsvetleni  && !blueLight){
+ 226:	0f 2e       	mov	r0, r31
+ 228:	f4 eb       	ldi	r31, 0xB4	; 180
+ 22a:	ef 2e       	mov	r14, r31
+ 22c:	f1 2c       	mov	r15, r1
+ 22e:	f0 2d       	mov	r31, r0
+				doEvent(i);
+				blueLight = 1;
+ 230:	cc 24       	eor	r12, r12
+ 232:	c3 94       	inc	r12
+ 234:	d1 2c       	mov	r13, r1
+ 236:	fe 01       	movw	r30, r28
+	hours = RTCGetHours();
+	minutes = RTCGetMinutes();
+	enableRTC = 0;
+
+	for(int i = 9;i > 0;i--){
+		if((hours == event[i].H && minutes >= event[i].M) || hours > event[i].H){
+ 238:	8d a5       	ldd	r24, Y+45	; 0x2d
+ 23a:	90 e0       	ldi	r25, 0x00	; 0
+ 23c:	20 91 3e 01 	lds	r18, 0x013E	; 0x80013e <hours>
+ 240:	30 91 3f 01 	lds	r19, 0x013F	; 0x80013f <hours+0x1>
+ 244:	82 17       	cp	r24, r18
+ 246:	93 07       	cpc	r25, r19
+ 248:	51 f4       	brne	.+20     	; 0x25e <ligtingRutine+0x74>
+ 24a:	8e a5       	ldd	r24, Y+46	; 0x2e
+ 24c:	90 e0       	ldi	r25, 0x00	; 0
+ 24e:	20 91 3c 01 	lds	r18, 0x013C	; 0x80013c <minutes>
+ 252:	30 91 3d 01 	lds	r19, 0x013D	; 0x80013d <minutes+0x1>
+ 256:	28 17       	cp	r18, r24
+ 258:	39 07       	cpc	r19, r25
+ 25a:	20 f4       	brcc	.+8      	; 0x264 <ligtingRutine+0x7a>
+ 25c:	3c c0       	rjmp	.+120    	; 0x2d6 <ligtingRutine+0xec>
+ 25e:	82 17       	cp	r24, r18
+ 260:	93 07       	cpc	r25, r19
+ 262:	c8 f5       	brcc	.+114    	; 0x2d6 <ligtingRutine+0xec>
+			if(*event[i].timer == hlavniOsvetleni  && !mainLight){
+ 264:	00 a8       	ldd	r0, Z+48	; 0x30
+ 266:	f1 a9       	ldd	r31, Z+49	; 0x31
+ 268:	e0 2d       	mov	r30, r0
+ 26a:	90 81       	ld	r25, Z
+ 26c:	87 b5       	in	r24, 0x27	; 39
+ 26e:	98 13       	cpse	r25, r24
+ 270:	0e c0       	rjmp	.+28     	; 0x28e <ligtingRutine+0xa4>
+ 272:	80 91 38 01 	lds	r24, 0x0138	; 0x800138 <mainLight>
+ 276:	90 91 39 01 	lds	r25, 0x0139	; 0x800139 <mainLight+0x1>
+ 27a:	89 2b       	or	r24, r25
+ 27c:	41 f4       	brne	.+16     	; 0x28e <ligtingRutine+0xa4>
+				doEvent(i);
+ 27e:	c8 01       	movw	r24, r16
+ 280:	0e 94 9b 00 	call	0x136	; 0x136 <doEvent>
+				mainLight = 1;
+ 284:	d0 92 39 01 	sts	0x0139, r13	; 0x800139 <mainLight+0x1>
+ 288:	c0 92 38 01 	sts	0x0138, r12	; 0x800138 <mainLight>
+ 28c:	24 c0       	rjmp	.+72     	; 0x2d6 <ligtingRutine+0xec>
+			}
+			else if(*event[i].timer == predniOsvetleni  && !frontLight){
+ 28e:	90 81       	ld	r25, Z
+ 290:	88 b5       	in	r24, 0x28	; 40
+ 292:	98 13       	cpse	r25, r24
+ 294:	0e c0       	rjmp	.+28     	; 0x2b2 <ligtingRutine+0xc8>
+ 296:	80 91 3a 01 	lds	r24, 0x013A	; 0x80013a <frontLight>
+ 29a:	90 91 3b 01 	lds	r25, 0x013B	; 0x80013b <frontLight+0x1>
+ 29e:	89 2b       	or	r24, r25
+ 2a0:	41 f4       	brne	.+16     	; 0x2b2 <ligtingRutine+0xc8>
+				doEvent(i);
+ 2a2:	c8 01       	movw	r24, r16
+ 2a4:	0e 94 9b 00 	call	0x136	; 0x136 <doEvent>
+				frontLight = 1;
+ 2a8:	d0 92 3b 01 	sts	0x013B, r13	; 0x80013b <frontLight+0x1>
+ 2ac:	c0 92 3a 01 	sts	0x013A, r12	; 0x80013a <frontLight>
+ 2b0:	12 c0       	rjmp	.+36     	; 0x2d6 <ligtingRutine+0xec>
+			}
+			else if(*event[i].timer == nocniOsvetleni  && !blueLight){
+ 2b2:	90 81       	ld	r25, Z
+ 2b4:	f7 01       	movw	r30, r14
+ 2b6:	80 81       	ld	r24, Z
+ 2b8:	98 13       	cpse	r25, r24
+ 2ba:	0d c0       	rjmp	.+26     	; 0x2d6 <ligtingRutine+0xec>
+ 2bc:	80 91 36 01 	lds	r24, 0x0136	; 0x800136 <blueLight>
+ 2c0:	90 91 37 01 	lds	r25, 0x0137	; 0x800137 <blueLight+0x1>
+ 2c4:	89 2b       	or	r24, r25
+ 2c6:	39 f4       	brne	.+14     	; 0x2d6 <ligtingRutine+0xec>
+				doEvent(i);
+ 2c8:	c8 01       	movw	r24, r16
+ 2ca:	0e 94 9b 00 	call	0x136	; 0x136 <doEvent>
+				blueLight = 1;
+ 2ce:	d0 92 37 01 	sts	0x0137, r13	; 0x800137 <blueLight+0x1>
+ 2d2:	c0 92 36 01 	sts	0x0136, r12	; 0x800136 <blueLight>
+void ligtingRutine(){
+	hours = RTCGetHours();
+	minutes = RTCGetMinutes();
+	enableRTC = 0;
+
+	for(int i = 9;i > 0;i--){
+ 2d6:	01 50       	subi	r16, 0x01	; 1
+ 2d8:	11 09       	sbc	r17, r1
+ 2da:	25 97       	sbiw	r28, 0x05	; 5
+ 2dc:	01 15       	cp	r16, r1
+ 2de:	11 05       	cpc	r17, r1
+ 2e0:	09 f0       	breq	.+2      	; 0x2e4 <ligtingRutine+0xfa>
+ 2e2:	a9 cf       	rjmp	.-174    	; 0x236 <ligtingRutine+0x4c>
+				blueLight = 1;
+			}
+			
+		}
+	}
+}
+ 2e4:	df 91       	pop	r29
+ 2e6:	cf 91       	pop	r28
+ 2e8:	1f 91       	pop	r17
+ 2ea:	0f 91       	pop	r16
+ 2ec:	ff 90       	pop	r15
+ 2ee:	ef 90       	pop	r14
+ 2f0:	df 90       	pop	r13
+ 2f2:	cf 90       	pop	r12
+ 2f4:	08 95       	ret
+
+000002f6 <main>:
+	{19, 5, 0, &hlavniOsvetleni},
+	{19, 5, 0, &nocniOsvetleni}
+};
+
+int main(void){
+	SerialInit(9600);
+ 2f6:	60 e8       	ldi	r22, 0x80	; 128
+ 2f8:	75 e2       	ldi	r23, 0x25	; 37
+ 2fa:	80 e0       	ldi	r24, 0x00	; 0
+ 2fc:	90 e0       	ldi	r25, 0x00	; 0
+ 2fe:	0e 94 97 02 	call	0x52e	; 0x52e <SerialInit>
+	MTWIInit(100000);
+ 302:	60 ea       	ldi	r22, 0xA0	; 160
+ 304:	76 e8       	ldi	r23, 0x86	; 134
+ 306:	81 e0       	ldi	r24, 0x01	; 1
+ 308:	90 e0       	ldi	r25, 0x00	; 0
+ 30a:	0e 94 d7 01 	call	0x3ae	; 0x3ae <MTWIInit>
+	ICR1=65055;
+ 30e:	8f e1       	ldi	r24, 0x1F	; 31
+ 310:	9e ef       	ldi	r25, 0xFE	; 254
+ 312:	90 93 87 00 	sts	0x0087, r25	; 0x800087 <__DATA_REGION_ORIGIN__+0x27>
+ 316:	80 93 86 00 	sts	0x0086, r24	; 0x800086 <__DATA_REGION_ORIGIN__+0x26>
+	OCR1A = 65055;
+ 31a:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__DATA_REGION_ORIGIN__+0x29>
+ 31e:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__DATA_REGION_ORIGIN__+0x28>
+	DDRB |= (1 << PINB5);
+ 322:	25 9a       	sbi	0x04, 5	; 4
+	TIMSK1 |=  (1 << OCIE1A); //Pøeteèení èítaèe1 = pøerušení a probuzení
+ 324:	ef e6       	ldi	r30, 0x6F	; 111
+ 326:	f0 e0       	ldi	r31, 0x00	; 0
+ 328:	80 81       	ld	r24, Z
+ 32a:	82 60       	ori	r24, 0x02	; 2
+ 32c:	80 83       	st	Z, r24
+	TCCR1B |= (1 << CS10) | (1 << CS12) | (1 << WGM12) | (1 << WGM13) ;
+ 32e:	e1 e8       	ldi	r30, 0x81	; 129
+ 330:	f0 e0       	ldi	r31, 0x00	; 0
+ 332:	80 81       	ld	r24, Z
+ 334:	8d 61       	ori	r24, 0x1D	; 29
+ 336:	80 83       	st	Z, r24
+	sei();
+ 338:	78 94       	sei
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 33a:	2f ef       	ldi	r18, 0xFF	; 255
+ 33c:	89 e6       	ldi	r24, 0x69	; 105
+ 33e:	98 e1       	ldi	r25, 0x18	; 24
+ 340:	21 50       	subi	r18, 0x01	; 1
+ 342:	80 40       	sbci	r24, 0x00	; 0
+ 344:	90 40       	sbci	r25, 0x00	; 0
+ 346:	e1 f7       	brne	.-8      	; 0x340 <main+0x4a>
+ 348:	00 c0       	rjmp	.+0      	; 0x34a <main+0x54>
+ 34a:	00 00       	nop
+	
+	while (1){
+		_delay_ms(500);
+		if(enableRTC)ligtingRutine();
+ 34c:	80 91 32 01 	lds	r24, 0x0132	; 0x800132 <enableRTC>
+ 350:	90 91 33 01 	lds	r25, 0x0133	; 0x800133 <enableRTC+0x1>
+ 354:	89 2b       	or	r24, r25
+ 356:	89 f3       	breq	.-30     	; 0x33a <main+0x44>
+ 358:	0e 94 f5 00 	call	0x1ea	; 0x1ea <ligtingRutine>
+ 35c:	ee cf       	rjmp	.-36     	; 0x33a <main+0x44>
+
+0000035e <__vector_11>:
+			TCCR2A &= ~(1 << COM2B1);
+		}
+	}
+}
+
+ISR(TIMER1_COMPA_vect){
+ 35e:	1f 92       	push	r1
+ 360:	0f 92       	push	r0
+ 362:	0f b6       	in	r0, 0x3f	; 63
+ 364:	0f 92       	push	r0
+ 366:	11 24       	eor	r1, r1
+ 368:	8f 93       	push	r24
+ 36a:	9f 93       	push	r25
+	if(timerOverflow < 3)timerOverflow++;
+ 36c:	80 91 34 01 	lds	r24, 0x0134	; 0x800134 <__data_end>
+ 370:	90 91 35 01 	lds	r25, 0x0135	; 0x800135 <__data_end+0x1>
+ 374:	03 97       	sbiw	r24, 0x03	; 3
+ 376:	54 f4       	brge	.+20     	; 0x38c <__vector_11+0x2e>
+ 378:	80 91 34 01 	lds	r24, 0x0134	; 0x800134 <__data_end>
+ 37c:	90 91 35 01 	lds	r25, 0x0135	; 0x800135 <__data_end+0x1>
+ 380:	01 96       	adiw	r24, 0x01	; 1
+ 382:	90 93 35 01 	sts	0x0135, r25	; 0x800135 <__data_end+0x1>
+ 386:	80 93 34 01 	sts	0x0134, r24	; 0x800134 <__data_end>
+ 38a:	0a c0       	rjmp	.+20     	; 0x3a0 <__vector_11+0x42>
+	else{
+		timerOverflow = 0;
+ 38c:	10 92 35 01 	sts	0x0135, r1	; 0x800135 <__data_end+0x1>
+ 390:	10 92 34 01 	sts	0x0134, r1	; 0x800134 <__data_end>
+		enableRTC = 1;
+ 394:	81 e0       	ldi	r24, 0x01	; 1
+ 396:	90 e0       	ldi	r25, 0x00	; 0
+ 398:	90 93 33 01 	sts	0x0133, r25	; 0x800133 <enableRTC+0x1>
+ 39c:	80 93 32 01 	sts	0x0132, r24	; 0x800132 <enableRTC>
+	}
+}
+ 3a0:	9f 91       	pop	r25
+ 3a2:	8f 91       	pop	r24
+ 3a4:	0f 90       	pop	r0
+ 3a6:	0f be       	out	0x3f, r0	; 63
+ 3a8:	0f 90       	pop	r0
+ 3aa:	1f 90       	pop	r1
+ 3ac:	18 95       	reti
+
+000003ae <MTWIInit>:
+
+//Inicializace
+void MTWIInit(uint32_t freq) {
+	//f=(F_CPU)/(16+2*TWBR*prescaler)
+	//prescaler=1
+	TWBR = ((F_CPU)/(2*freq)-8);
+ 3ae:	9b 01       	movw	r18, r22
+ 3b0:	ac 01       	movw	r20, r24
+ 3b2:	22 0f       	add	r18, r18
+ 3b4:	33 1f       	adc	r19, r19
+ 3b6:	44 1f       	adc	r20, r20
+ 3b8:	55 1f       	adc	r21, r21
+ 3ba:	60 e0       	ldi	r22, 0x00	; 0
+ 3bc:	74 e2       	ldi	r23, 0x24	; 36
+ 3be:	84 ef       	ldi	r24, 0xF4	; 244
+ 3c0:	90 e0       	ldi	r25, 0x00	; 0
+ 3c2:	0e 94 b4 02 	call	0x568	; 0x568 <__udivmodsi4>
+ 3c6:	28 50       	subi	r18, 0x08	; 8
+ 3c8:	20 93 b8 00 	sts	0x00B8, r18	; 0x8000b8 <__DATA_REGION_ORIGIN__+0x58>
+ 3cc:	08 95       	ret
+
+000003ce <MTWIStart>:
+}
+
+//Zahajeni zapisovani: 0-uspech, 1-selhani
+uint8_t MTWIStart(uint8_t addr, uint8_t mode) { 
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTA); //poslani start sekvence
+ 3ce:	94 ea       	ldi	r25, 0xA4	; 164
+ 3d0:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__DATA_REGION_ORIGIN__+0x5c>
+	while(!(TWCR & (1<<TWINT))); //cekat na dokonceni startu
+ 3d4:	ec eb       	ldi	r30, 0xBC	; 188
+ 3d6:	f0 e0       	ldi	r31, 0x00	; 0
+ 3d8:	90 81       	ld	r25, Z
+ 3da:	99 23       	and	r25, r25
+ 3dc:	ec f7       	brge	.-6      	; 0x3d8 <MTWIStart+0xa>
+	if ((TW_STATUS != TW_START) && (TW_STATUS != TW_REP_START)) return 1; //kontrola stavu
+ 3de:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__DATA_REGION_ORIGIN__+0x59>
+ 3e2:	98 7f       	andi	r25, 0xF8	; 248
+ 3e4:	98 30       	cpi	r25, 0x08	; 8
+ 3e6:	29 f0       	breq	.+10     	; 0x3f2 <MTWIStart+0x24>
+ 3e8:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__DATA_REGION_ORIGIN__+0x59>
+ 3ec:	98 7f       	andi	r25, 0xF8	; 248
+ 3ee:	90 31       	cpi	r25, 0x10	; 16
+ 3f0:	f9 f4       	brne	.+62     	; 0x430 <__LOCK_REGION_LENGTH__+0x30>
+	if (mode==WRITE) addr = (addr<<1);
+ 3f2:	61 11       	cpse	r22, r1
+ 3f4:	02 c0       	rjmp	.+4      	; 0x3fa <MTWIStart+0x2c>
+ 3f6:	88 0f       	add	r24, r24
+ 3f8:	04 c0       	rjmp	.+8      	; 0x402 <__LOCK_REGION_LENGTH__+0x2>
+	if (mode==READ) addr = (addr<<1) | 1;
+ 3fa:	61 30       	cpi	r22, 0x01	; 1
+ 3fc:	11 f4       	brne	.+4      	; 0x402 <__LOCK_REGION_LENGTH__+0x2>
+ 3fe:	88 0f       	add	r24, r24
+ 400:	81 60       	ori	r24, 0x01	; 1
+	TWDR = addr; //zapsani adresy s write modem
+ 402:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__DATA_REGION_ORIGIN__+0x5b>
+	TWCR = (1<<TWINT) | (1<<TWEN); //odeslani
+ 406:	84 e8       	ldi	r24, 0x84	; 132
+ 408:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__DATA_REGION_ORIGIN__+0x5c>
+	while(!(TWCR & (1<<TWINT))); //cekat na dokonceni prenosu adresy
+ 40c:	ec eb       	ldi	r30, 0xBC	; 188
+ 40e:	f0 e0       	ldi	r31, 0x00	; 0
+ 410:	80 81       	ld	r24, Z
+ 412:	88 23       	and	r24, r24
+ 414:	ec f7       	brge	.-6      	; 0x410 <__LOCK_REGION_LENGTH__+0x10>
+	if ((TW_STATUS != TW_MT_SLA_ACK) && (TW_STATUS != TW_MR_SLA_ACK)) return 1; //pokud slave neodpovedel - selhani
+ 416:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__DATA_REGION_ORIGIN__+0x59>
+ 41a:	88 7f       	andi	r24, 0xF8	; 248
+ 41c:	88 31       	cpi	r24, 0x18	; 24
+ 41e:	51 f0       	breq	.+20     	; 0x434 <__LOCK_REGION_LENGTH__+0x34>
+ 420:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__DATA_REGION_ORIGIN__+0x59>
+
+//Zahajeni zapisovani: 0-uspech, 1-selhani
+uint8_t MTWIStart(uint8_t addr, uint8_t mode) { 
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTA); //poslani start sekvence
+	while(!(TWCR & (1<<TWINT))); //cekat na dokonceni startu
+	if ((TW_STATUS != TW_START) && (TW_STATUS != TW_REP_START)) return 1; //kontrola stavu
+ 424:	98 7f       	andi	r25, 0xF8	; 248
+ 426:	81 e0       	ldi	r24, 0x01	; 1
+ 428:	90 34       	cpi	r25, 0x40	; 64
+ 42a:	29 f4       	brne	.+10     	; 0x436 <__LOCK_REGION_LENGTH__+0x36>
+ 42c:	80 e0       	ldi	r24, 0x00	; 0
+ 42e:	08 95       	ret
+ 430:	81 e0       	ldi	r24, 0x01	; 1
+ 432:	08 95       	ret
+	if (mode==READ) addr = (addr<<1) | 1;
+	TWDR = addr; //zapsani adresy s write modem
+	TWCR = (1<<TWINT) | (1<<TWEN); //odeslani
+	while(!(TWCR & (1<<TWINT))); //cekat na dokonceni prenosu adresy
+	if ((TW_STATUS != TW_MT_SLA_ACK) && (TW_STATUS != TW_MR_SLA_ACK)) return 1; //pokud slave neodpovedel - selhani
+	return 0;
+ 434:	80 e0       	ldi	r24, 0x00	; 0
+}
+ 436:	08 95       	ret
+
+00000438 <MTWIWrite>:
+
+//Zapis dat: 0-uspech, 1-selhani
+uint8_t MTWIWrite(uint8_t data) {
+	TWDR = data; //nacteni dat
+ 438:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__DATA_REGION_ORIGIN__+0x5b>
+	TWCR = (1<<TWINT) | (1<<TWEN); //poslani dat
+ 43c:	84 e8       	ldi	r24, 0x84	; 132
+ 43e:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__DATA_REGION_ORIGIN__+0x5c>
+	while(!(TWCR & (1<<TWINT))); //cekat na dokonceni prenosu
+ 442:	ec eb       	ldi	r30, 0xBC	; 188
+ 444:	f0 e0       	ldi	r31, 0x00	; 0
+ 446:	80 81       	ld	r24, Z
+ 448:	88 23       	and	r24, r24
+ 44a:	ec f7       	brge	.-6      	; 0x446 <MTWIWrite+0xe>
+	if (TW_STATUS != TW_MT_DATA_ACK) return 1; //pokud slave neodpovedel - selhani
+ 44c:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__DATA_REGION_ORIGIN__+0x59>
+ 450:	98 7f       	andi	r25, 0xF8	; 248
+ 452:	81 e0       	ldi	r24, 0x01	; 1
+ 454:	98 32       	cpi	r25, 0x28	; 40
+ 456:	09 f4       	brne	.+2      	; 0x45a <MTWIWrite+0x22>
+ 458:	80 e0       	ldi	r24, 0x00	; 0
+	return 0;
+}
+ 45a:	08 95       	ret
+
+0000045c <MTWIRead>:
+
+//Cteni dat
+uint8_t MTWIRead(uint8_t mode) {
+	if (mode==ACK) TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWEA); //nastaveni posilani ack
+ 45c:	81 11       	cpse	r24, r1
+ 45e:	04 c0       	rjmp	.+8      	; 0x468 <MTWIRead+0xc>
+ 460:	94 ec       	ldi	r25, 0xC4	; 196
+ 462:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__DATA_REGION_ORIGIN__+0x5c>
+ 466:	05 c0       	rjmp	.+10     	; 0x472 <MTWIRead+0x16>
+	if (mode==NACK) TWCR = (1<<TWINT) | (1<<TWEN); //nenastavovat ack
+ 468:	81 30       	cpi	r24, 0x01	; 1
+ 46a:	19 f4       	brne	.+6      	; 0x472 <MTWIRead+0x16>
+ 46c:	94 e8       	ldi	r25, 0x84	; 132
+ 46e:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__DATA_REGION_ORIGIN__+0x5c>
+	while(!(TWCR & (1<<TWINT))); //cekani na dokonceni prenosu
+ 472:	ec eb       	ldi	r30, 0xBC	; 188
+ 474:	f0 e0       	ldi	r31, 0x00	; 0
+ 476:	90 81       	ld	r25, Z
+ 478:	99 23       	and	r25, r25
+ 47a:	ec f7       	brge	.-6      	; 0x476 <MTWIRead+0x1a>
+	if (mode==ACK) if (TW_STATUS != TW_MR_DATA_ACK) return 1; //pokud master neodpovedel - selhani
+ 47c:	81 11       	cpse	r24, r1
+ 47e:	06 c0       	rjmp	.+12     	; 0x48c <MTWIRead+0x30>
+ 480:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__DATA_REGION_ORIGIN__+0x59>
+ 484:	88 7f       	andi	r24, 0xF8	; 248
+ 486:	80 35       	cpi	r24, 0x50	; 80
+ 488:	59 f4       	brne	.+22     	; 0x4a0 <MTWIRead+0x44>
+ 48a:	07 c0       	rjmp	.+14     	; 0x49a <MTWIRead+0x3e>
+	if (mode==NACK) if (TW_STATUS != TW_MR_DATA_NACK) return 1; //pokud master neodpovedel - selhani
+ 48c:	81 30       	cpi	r24, 0x01	; 1
+ 48e:	29 f4       	brne	.+10     	; 0x49a <MTWIRead+0x3e>
+ 490:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__DATA_REGION_ORIGIN__+0x59>
+ 494:	88 7f       	andi	r24, 0xF8	; 248
+ 496:	88 35       	cpi	r24, 0x58	; 88
+ 498:	29 f4       	brne	.+10     	; 0x4a4 <MTWIRead+0x48>
+	return TWDR; 
+ 49a:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__DATA_REGION_ORIGIN__+0x5b>
+ 49e:	08 95       	ret
+//Cteni dat
+uint8_t MTWIRead(uint8_t mode) {
+	if (mode==ACK) TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWEA); //nastaveni posilani ack
+	if (mode==NACK) TWCR = (1<<TWINT) | (1<<TWEN); //nenastavovat ack
+	while(!(TWCR & (1<<TWINT))); //cekani na dokonceni prenosu
+	if (mode==ACK) if (TW_STATUS != TW_MR_DATA_ACK) return 1; //pokud master neodpovedel - selhani
+ 4a0:	81 e0       	ldi	r24, 0x01	; 1
+ 4a2:	08 95       	ret
+	if (mode==NACK) if (TW_STATUS != TW_MR_DATA_NACK) return 1; //pokud master neodpovedel - selhani
+ 4a4:	81 e0       	ldi	r24, 0x01	; 1
+	return TWDR; 
+}
+ 4a6:	08 95       	ret
+
+000004a8 <MTWIStop>:
+
+//Zastaveni komunikace
+void MTWIStop() {
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);//poslani stop sekvence
+ 4a8:	84 e9       	ldi	r24, 0x94	; 148
+ 4aa:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__DATA_REGION_ORIGIN__+0x5c>
+	while(TWCR & (1<<TWSTO)); //cekat nez se stop sekvence posle
+ 4ae:	ec eb       	ldi	r30, 0xBC	; 188
+ 4b0:	f0 e0       	ldi	r31, 0x00	; 0
+ 4b2:	80 81       	ld	r24, Z
+ 4b4:	84 fd       	sbrc	r24, 4
+ 4b6:	fd cf       	rjmp	.-6      	; 0x4b2 <MTWIStop+0xa>
+}
+ 4b8:	08 95       	ret
+
+000004ba <MTWIReadRegister>:
+
+uint8_t MTWIReadRegister(uint8_t slave_addr, uint8_t reg_addr) {
+ 4ba:	cf 93       	push	r28
+ 4bc:	df 93       	push	r29
+ 4be:	c8 2f       	mov	r28, r24
+ 4c0:	d6 2f       	mov	r29, r22
+	MTWIStart(slave_addr, WRITE);
+ 4c2:	60 e0       	ldi	r22, 0x00	; 0
+ 4c4:	0e 94 e7 01 	call	0x3ce	; 0x3ce <MTWIStart>
+	MTWIWrite(reg_addr);
+ 4c8:	8d 2f       	mov	r24, r29
+ 4ca:	0e 94 1c 02 	call	0x438	; 0x438 <MTWIWrite>
+	MTWIStop();
+ 4ce:	0e 94 54 02 	call	0x4a8	; 0x4a8 <MTWIStop>
+	MTWIStart(slave_addr, READ);
+ 4d2:	61 e0       	ldi	r22, 0x01	; 1
+ 4d4:	8c 2f       	mov	r24, r28
+ 4d6:	0e 94 e7 01 	call	0x3ce	; 0x3ce <MTWIStart>
+	uint8_t response = MTWIRead(NACK);
+ 4da:	81 e0       	ldi	r24, 0x01	; 1
+ 4dc:	0e 94 2e 02 	call	0x45c	; 0x45c <MTWIRead>
+ 4e0:	c8 2f       	mov	r28, r24
+	MTWIStop();
+ 4e2:	0e 94 54 02 	call	0x4a8	; 0x4a8 <MTWIStop>
+	return response;
+}
+ 4e6:	8c 2f       	mov	r24, r28
+ 4e8:	df 91       	pop	r29
+ 4ea:	cf 91       	pop	r28
+ 4ec:	08 95       	ret
+
+000004ee <RTCGetMinutes>:
+	uint8_t sec = MTWIReadRegister(ADDRESS, RTCSEC);
+	return ((sec&0b00001111)+((sec&0b01110000)>>4)*10);
+}
+
+uint8_t RTCGetMinutes() {
+	uint8_t min = MTWIReadRegister(ADDRESS, RTCMIN);
+ 4ee:	61 e0       	ldi	r22, 0x01	; 1
+ 4f0:	88 e6       	ldi	r24, 0x68	; 104
+ 4f2:	0e 94 5d 02 	call	0x4ba	; 0x4ba <MTWIReadRegister>
+	return ((min&0b00001111)+((min&0b01110000)>>4)*10);
+ 4f6:	98 2f       	mov	r25, r24
+ 4f8:	90 77       	andi	r25, 0x70	; 112
+ 4fa:	96 95       	lsr	r25
+ 4fc:	96 95       	lsr	r25
+ 4fe:	96 95       	lsr	r25
+ 500:	29 2f       	mov	r18, r25
+ 502:	22 0f       	add	r18, r18
+ 504:	22 0f       	add	r18, r18
+ 506:	92 0f       	add	r25, r18
+ 508:	8f 70       	andi	r24, 0x0F	; 15
+}
+ 50a:	89 0f       	add	r24, r25
+ 50c:	08 95       	ret
+
+0000050e <RTCGetHours>:
+
+uint8_t RTCGetHours() {
+	uint8_t hr = MTWIReadRegister(ADDRESS, RTCHOUR);
+ 50e:	62 e0       	ldi	r22, 0x02	; 2
+ 510:	88 e6       	ldi	r24, 0x68	; 104
+ 512:	0e 94 5d 02 	call	0x4ba	; 0x4ba <MTWIReadRegister>
+	return ((hr&0b00001111)+((hr&0b00110000)>>4)*10);
+ 516:	98 2f       	mov	r25, r24
+ 518:	90 73       	andi	r25, 0x30	; 48
+ 51a:	96 95       	lsr	r25
+ 51c:	96 95       	lsr	r25
+ 51e:	96 95       	lsr	r25
+ 520:	29 2f       	mov	r18, r25
+ 522:	22 0f       	add	r18, r18
+ 524:	22 0f       	add	r18, r18
+ 526:	92 0f       	add	r25, r18
+ 528:	8f 70       	andi	r24, 0x0F	; 15
+}
+ 52a:	89 0f       	add	r24, r25
+ 52c:	08 95       	ret
+
+0000052e <SerialInit>:
+#include <avr/io.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void SerialInit(unsigned long baud) {
+ 52e:	9b 01       	movw	r18, r22
+ 530:	ac 01       	movw	r20, r24
+	UCSR0B = (1 << RXEN0) | (1 << TXEN0);   // Zapnutí serial rx a tx
+ 532:	88 e1       	ldi	r24, 0x18	; 24
+ 534:	80 93 c1 00 	sts	0x00C1, r24	; 0x8000c1 <__DATA_REGION_ORIGIN__+0x61>
+	UCSR0C = (1 << UCSZ00) | (1 << UCSZ01); // 8bitový formát s 1 stop-bitem
+ 538:	86 e0       	ldi	r24, 0x06	; 6
+ 53a:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__DATA_REGION_ORIGIN__+0x62>
+	UBRR0H = ((((F_CPU / 16 / baud)) - 1) >> 8); // Zapsání UBBR do horn?jšího registru
+ 53e:	60 e4       	ldi	r22, 0x40	; 64
+ 540:	72 e4       	ldi	r23, 0x42	; 66
+ 542:	8f e0       	ldi	r24, 0x0F	; 15
+ 544:	90 e0       	ldi	r25, 0x00	; 0
+ 546:	0e 94 b4 02 	call	0x568	; 0x568 <__udivmodsi4>
+ 54a:	da 01       	movw	r26, r20
+ 54c:	c9 01       	movw	r24, r18
+ 54e:	01 97       	sbiw	r24, 0x01	; 1
+ 550:	a1 09       	sbc	r26, r1
+ 552:	b1 09       	sbc	r27, r1
+ 554:	89 2f       	mov	r24, r25
+ 556:	9a 2f       	mov	r25, r26
+ 558:	ab 2f       	mov	r26, r27
+ 55a:	bb 27       	eor	r27, r27
+ 55c:	80 93 c5 00 	sts	0x00C5, r24	; 0x8000c5 <__DATA_REGION_ORIGIN__+0x65>
+	UBRR0L = (((F_CPU / 16 / baud)) - 1); // Zapsání UBBR do spodn?jšího registru
+ 560:	21 50       	subi	r18, 0x01	; 1
+ 562:	20 93 c4 00 	sts	0x00C4, r18	; 0x8000c4 <__DATA_REGION_ORIGIN__+0x64>
+ 566:	08 95       	ret
+
+00000568 <__udivmodsi4>:
+ 568:	a1 e2       	ldi	r26, 0x21	; 33
+ 56a:	1a 2e       	mov	r1, r26
+ 56c:	aa 1b       	sub	r26, r26
+ 56e:	bb 1b       	sub	r27, r27
+ 570:	fd 01       	movw	r30, r26
+ 572:	0d c0       	rjmp	.+26     	; 0x58e <__udivmodsi4_ep>
+
+00000574 <__udivmodsi4_loop>:
+ 574:	aa 1f       	adc	r26, r26
+ 576:	bb 1f       	adc	r27, r27
+ 578:	ee 1f       	adc	r30, r30
+ 57a:	ff 1f       	adc	r31, r31
+ 57c:	a2 17       	cp	r26, r18
+ 57e:	b3 07       	cpc	r27, r19
+ 580:	e4 07       	cpc	r30, r20
+ 582:	f5 07       	cpc	r31, r21
+ 584:	20 f0       	brcs	.+8      	; 0x58e <__udivmodsi4_ep>
+ 586:	a2 1b       	sub	r26, r18
+ 588:	b3 0b       	sbc	r27, r19
+ 58a:	e4 0b       	sbc	r30, r20
+ 58c:	f5 0b       	sbc	r31, r21
+
+0000058e <__udivmodsi4_ep>:
+ 58e:	66 1f       	adc	r22, r22
+ 590:	77 1f       	adc	r23, r23
+ 592:	88 1f       	adc	r24, r24
+ 594:	99 1f       	adc	r25, r25
+ 596:	1a 94       	dec	r1
+ 598:	69 f7       	brne	.-38     	; 0x574 <__udivmodsi4_loop>
+ 59a:	60 95       	com	r22
+ 59c:	70 95       	com	r23
+ 59e:	80 95       	com	r24
+ 5a0:	90 95       	com	r25
+ 5a2:	9b 01       	movw	r18, r22
+ 5a4:	ac 01       	movw	r20, r24
+ 5a6:	bd 01       	movw	r22, r26
+ 5a8:	cf 01       	movw	r24, r30
+ 5aa:	08 95       	ret
+
+000005ac <_exit>:
+ 5ac:	f8 94       	cli
+
+000005ae <__stop_program>:
+ 5ae:	ff cf       	rjmp	.-2      	; 0x5ae <__stop_program>
