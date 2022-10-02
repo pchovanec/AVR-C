@@ -24,13 +24,13 @@ int blueLight;
 void watchdogSetup(void);
 void ligtingRutine(void);
 void timerControl(volatile uint8_t *timer, uint8_t init);
-void doEvent(int i);
+void initTimer(int i);
 
 struct trigger{
 	uint8_t H;
 	uint8_t M;
 	uint8_t limit;
-	volatile uint8_t *timer;
+	volatile uint8_t *timer; //PWM 
 	}event[] = {
 	{9, 45, 200, &hlavniOsvetleni},
 	{9, 55, 200, &predniOsvetleni},
@@ -50,7 +50,7 @@ int main(void){
 	ICR1=65055;
 	OCR1A = 65055;
 	DDRB |= (1 << PINB5);
-	TIMSK1 |=  (1 << OCIE1A); //Pøeteèení èítaèe1 = pøerušení a probuzení
+	TIMSK1 |=  (1 << OCIE1A); //PÅ™eteÄenÃ­ ÄÃ­taÄe1 = pÅ™eruÅ¡enÃ­ a probuzenÃ­
 	TCCR1B |= (1 << CS10) | (1 << CS12) | (1 << WGM12) | (1 << WGM13) ;
 	sei();
 	
@@ -60,78 +60,115 @@ int main(void){
 	}
 }
 
-
 void ligtingRutine(){
+	int mainLightIncremented = 0;
+	int frontLightIncremented = 0;
+	int blueLightIncremented = 0;
 	hours = RTCGetHours();
 	minutes = RTCGetMinutes();
 	enableRTC = 0;
 
-	for(int i = 9;i > 0;i--){
+	for(int i = 9;i > 0;i--){	
 		if((hours == event[i].H && minutes >= event[i].M) || hours > event[i].H){
-			if(*event[i].timer == hlavniOsvetleni  && !mainLight){
-				doEvent(i);
+		
+			//Inicializace PWM pro danou udalost
+			if(event[i].timer == &hlavniOsvetleni && !mainLight){
+				initTimer(i);
 				mainLight = 1;
 			}
-			else if(*event[i].timer == predniOsvetleni  && !frontLight){
-				doEvent(i);
+			else if(event[i].timer == &predniOsvetleni && !frontLight){
+				initTimer(i);
 				frontLight = 1;
 			}
-			else if(*event[i].timer == nocniOsvetleni  && !blueLight){
-				doEvent(i);
+			else if(event[i].timer == &nocniOsvetleni && !blueLight){
+				initTimer(i);
 				blueLight = 1;
+			}
+		
+			//Pricteni jednicky k jednotlivym citacum	
+			if(event[i].timer == &hlavniOsvetleni && !mainLightIncremented){
+				if(*event[i].timer < event[i].limit){
+					hlavniOsvetleni++;
+					mainLightIncremented = 1;
+				}
+				else if (*event[i].timer > event[i].limit){
+					hlavniOsvetleni--;
+					mainLightIncremented = 1;
+					if(*event[i].timer == 0)initTimer(i);
+				}
+			}
+			
+			else if(event[i].timer == &predniOsvetleni && !frontLightIncremented){
+				if(*event[i].timer < event[i].limit){
+					predniOsvetleni++;
+					frontLightIncremented = 1;
+				}
+				else if (*event[i].timer > event[i].limit){
+					predniOsvetleni--;
+					frontLightIncremented = 1;
+					if(*event[i].timer == 0)initTimer(i);
+				}
+			}
+			
+			else if(event[i].timer == &nocniOsvetleni && !blueLightIncremented){
+				if(*event[i].timer < event[i].limit){
+					nocniOsvetleni++;
+					blueLightIncremented = 1;
+				}
+				else if (*event[i].timer > event[i].limit){
+					nocniOsvetleni--;
+					blueLightIncremented = 1;
+					if(*event[i].timer == 0)initTimer(i);
+				}
 			}
 			
 		}
-	}
+		
+	}		
 }
 
-void doEvent(int i){
-	if(*event[i].timer < event[i].limit){
-		*event[i].timer++;
-	}
-	else if(*event[i].timer < event[i].limit){
-		*event[i].timer--;
-	}
-	
-	if(*event[i].timer == 0){
-		timerControl(event[i].timer,0);
-	}
-	
-	if(*event[i].timer >= 1){
+void initTimer(int i){
+	if(*event[i].timer != event[i].limit){
 		timerControl(event[i].timer,1);
+	}
+	else if(*event[i].timer == event[i].limit){
+		timerControl(event[i].timer,0);
 	}
 }
 
 void timerControl(volatile uint8_t *timer, uint8_t init){
 	if (init){
-		if(*timer == hlavniOsvetleni){
+		if(timer == &hlavniOsvetleni){
 			DDRD |= (1 << PIND6);
 			TCCR0A |= (1 << COM0A1) | (1 << WGM00) | (1 << WGM01);
 			TCCR0B |= (1 << CS00);
 		}
-		else if(*timer == predniOsvetleni){
+		else if(timer == &predniOsvetleni){
 			DDRD |= (1 << PIND5);
 			TCCR0A |= (1 << COM0B1) | (1 << WGM00) | (1 << WGM01);
 			TCCR0B |= (1 << CS00);
 		}
-		else if(*timer == nocniOsvetleni){
+		else if(timer == &nocniOsvetleni){
 			DDRD |= (1 << PIND3);
 			TCCR2A |= (1 << COM2B1) | (1 << WGM20) | (1 << WGM21);
 			TCCR2B |= (1 << CS20);
 		}
 	}
 	else if (!init){
-		if(*timer == hlavniOsvetleni){
+		if(timer == &hlavniOsvetleni){
 			DDRD &= ~(1 << PIND6);
-			TCCR0A &= ~(1 << COM0A1);
+			TCCR0A = 0;
+			TCCR0B = 0;
 		}
-		if(*timer == predniOsvetleni){
+		else if(timer == &predniOsvetleni){
 			DDRD &= ~(1 << PIND5);
-			TCCR0A &= ~(1 << COM0B1);
+			TCCR0A = 0;
+			TCCR0B = 0;
 		}
-		if(*timer == nocniOsvetleni){
+		else if(timer == &nocniOsvetleni){
 			DDRD &= ~(1 << PIND3);
-			TCCR2A &= ~(1 << COM2B1);
+			TCCR2A = 0;
+			TCCR2B = 0;
 		}
 	}
 }
@@ -143,5 +180,4 @@ ISR(TIMER1_COMPA_vect){
 		enableRTC = 1;
 	}
 }
-
 
