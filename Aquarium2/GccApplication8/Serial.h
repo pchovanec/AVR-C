@@ -2,8 +2,6 @@
 #define SERIAL_H_
 void SerialInit(unsigned long baud);
 
-void SerialAdvancedInit(unsigned long baud);
-
 void SerialEnable(void);
 
 void SerialDisable(void);
@@ -22,4 +20,4 @@ void SerialSendNumber(uint16_t num, unsigned char system);
 
 char SerialAvailabel(void);
 
-#endif /* SERIAL_H_ */
+#endif 
