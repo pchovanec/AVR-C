@@ -6,40 +6,33 @@
 #include <string.h>
 
 void SerialInit(unsigned long baud) {
-	UCSR0B = (1 << RXEN0) | (1 << TXEN0);   // Zapnutí serial rx a tx
-	UCSR0C = (1 << UCSZ00) | (1 << UCSZ01); // 8bitový formát s 1 stop-bitem
-	UBRR0H = ((((F_CPU / 16 / baud)) - 1) >> 8); // Zapsání UBBR do horn?jšího registru
-	UBRR0L = (((F_CPU / 16 / baud)) - 1); // Zapsání UBBR do spodn?jšího registru
-}
-
-void SerialAdvancedInit(unsigned long baud) {
-	UCSR0B = (1 << RXEN0) | (1 << TXEN0);   // Zapnutí serial rx a tx
-	UCSR0C = (1 << UCSZ00) | (1 << UCSZ01); // 8bitový formát s 1 stop-bitem
-	UBRR0H = ((((F_CPU / 16 / baud)) - 1) >> 8); // Zapsání UBBR do horn?jšího registru
-	UBRR0L = (((F_CPU / 16 / baud)) - 1); // Zapsání UBBR do spodn?jšího registru
+	UCSR0B = (1 << RXEN0) | (1 << TXEN0);   // ZapnutÃ­ serial rx a tx
+	UCSR0C = (1 << UCSZ00) | (1 << UCSZ01); // 8bitovÃ½ formÃ¡t s 1 stop-bitem
+	UBRR0H = ((((F_CPU / 16 / baud)) - 1) >> 8); // ZapsÃ¡nÃ­ UBBR do horn?jÅ¡Ã­ho registru
+	UBRR0L = (((F_CPU / 16 / baud)) - 1); // ZapsÃ¡nÃ­ UBBR do spodn?jÅ¡Ã­ho registru
 }
 
 void SerialEnable(void) {
-	UCSR0B |= (1 << RXEN0) | (1 << TXEN0);	// Zapnutí serial rx a tx
+	UCSR0B |= (1 << RXEN0) | (1 << TXEN0);	// ZapnutÃ­ serial rx a tx
 }
 
 void SerialDisable(void) {
-	UCSR0B &= ~((1 << RXEN0) | (1 << TXEN0));	// Vypnutí serial rx a tx
+	UCSR0B &= ~((1 << RXEN0) | (1 << TXEN0));	// VypnutÃ­ serial rx a tx
 }
 
 void SerialSendChar(char a) {
-	while (!(UCSR0A & (1 << UDRE0))) {}	// ?ekání, než bude registr na data volný
-	UDR0 = a;	// Zapsání charu do data registru
+	while (!(UCSR0A & (1 << UDRE0))) {}	// ?ekÃ¡nÃ­, neÅ¾ bude registr na data volnÃ½
+	UDR0 = a;	// ZapsÃ¡nÃ­ charu do data registru
 }
 
 char SerialRecieveChar(void) {
-	while (!(UCSR0A & (1 << RXC0))) {}	// ?ekání, než bude registr na data zapln?ný
-	return UDR0;	// Funkce vrátí to, co je v registru na data
+	while (!(UCSR0A & (1 << RXC0))) {}	// ?ekÃ¡nÃ­, neÅ¾ bude registr na data zapln?nÃ½
+	return UDR0;	// Funkce vrÃ¡tÃ­ to, co je v registru na data
 }
 
 void SerialSendString(const char * c) {
-	for (uint32_t i=0;i<strlen(c);i++)	//Cyklus na rozd?lení stringu do char?
-	SerialSendChar(c[i]);	// Posílání jednotlivých char?
+	for (uint32_t i=0;i<strlen(c);i++)	//Cyklus na rozd?lenÃ­ stringu do char?
+	SerialSendChar(c[i]);	// PosÃ­lÃ¡nÃ­ jednotlivÃ½ch char?
 }
 
 void SerialSendDec(long int c) {
@@ -48,7 +41,7 @@ void SerialSendDec(long int c) {
 	SerialSendString(b);
 }
 
-void SerialSendNumber(uint16_t num, unsigned char system) { //do "system" psát pouze: 2-binární soustava=BIN, 8-osmi?ková=OCT, 10-dekadická=default, 16-hexadecimální=HEX
+void SerialSendNumber(uint16_t num, unsigned char system) { //do "system" psÃ¡t pouze: 2-binÃ¡rnÃ­ soustava=BIN, 8-osmi?kovÃ¡=OCT, 10-dekadickÃ¡=default, 16-hexadecimÃ¡lnÃ­=HEX
 	char buffer[20];
 	itoa(num,buffer,system);
 	SerialSendString(buffer);
@@ -56,6 +49,6 @@ void SerialSendNumber(uint16_t num, unsigned char system) { //do "system" psát p
 }
 
 char SerialAvailable() {
-	if (UCSR0A & (1 << RXC0)) return 1;	// Je registr volný?
-	else return 0;	// Není.
+	if (UCSR0A & (1 << RXC0)) return 1;	// Je registr volnÃ½?
+	else return 0;	// NenÃ­.
 }
