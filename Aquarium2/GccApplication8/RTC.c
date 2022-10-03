@@ -7,7 +7,7 @@ void RTCInit() {
 	hr = MTWIReadRegister(ADDRESS, RTCHOUR); 
 	MTWIWriteRegister(ADDRESS, RTCSEC, (sec |= 0b10000000)); //zapnuti
 	MTWIWriteRegister(ADDRESS, RTCHOUR, (hr &= ~(0b01000000))); //nastaveni 24h formatu
-	MTWIWriteRegister(ADDRESS, CONTROL, 0); //vypnuti vsech blbosti
+	MTWIWriteRegister(ADDRESS, CONTROL, 0);
 }
 
 uint8_t RTCGetSeconds() {
